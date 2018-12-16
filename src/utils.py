@@ -2,7 +2,7 @@ class Utils:
 
     def load_dimacs_cnf_file(self, cnf_file):
         """
-        Reads and parses Dimacs CNF formatted files. Note much of this code was taken from stack-overflow
+        Reads and parses Dimacs CNF formatted files. Note some of this code was taken from stack-overflow
 
         https://stackoverflow.com/questions/28890268/parse-dimacs-cnf-file-python
 
