@@ -1,34 +1,54 @@
+import sys
+
 class Utils:
 
     def load_dimacs_cnf_file(self, cnf_file):
-        """
-        Reads and parses Dimacs CNF formatted files. Note some of this code was taken from stack-overflow
+        file = open(cnf_file, 'r')
 
-        https://stackoverflow.com/questions/28890268/parse-dimacs-cnf-file-python
+        tVariables = -1
+        tClauses = -1
+        clause = []
+        variables = []
 
-        :param cnf_file: The path to the cnf file
-        :return: Parsed cnf file
-        """
-        with open(cnf_file) as file:
-            content = file.readlines()
+        current_clause = []
 
-        cnf = list()
-        cnf.append(list())
-        max_var = 0
+        for line in file:
+            data = line.split()
 
-        for line in content:
-            tokens = line.split()
-            if len(tokens) != 0 and tokens[0] not in ("p", "c", "%"):
-                for token in tokens:
-                    lit = int(token)
-                    max_var = max(max_var, abs(lit))
-                    if lit == 0:
-                        cnf.append(list())
-                    else:
-                        cnf[-1].append(lit)
+            if len(data) == 0:
+                continue
+            if data[0] == 'c':
+                continue
+            if data[0] == 'p':
+                tVariables = int(data[2])
+                tClauses = int(data[3])
+                continue
+            if data[0] == '%':
+                break
+            if tVariables == -1 or tClauses == -1:
+                print("Error, unexpected data")
+                sys.exit(0)
 
-        assert len(cnf[-1]) == 0
+            for var_i in data:
+                literal = int(var_i)
+                if literal == 0:
+                    clause.append(current_clause)
+                    current_clause = []
+                    continue
+                var = literal
+                if var < 0:
+                    var = -var
+                if var not in variables:
+                    variables.append(var)
+                current_clause.append(literal)
 
-        cnf.pop()
-
-        return cnf, max_var
+        if tVariables != len(variables):
+            print("Unexpected number of variables in the problem")
+            print("Variables", tVariables, "len: ", len(variables))
+            print(variables)
+            sys.exit(0)
+        if tClauses != len(clause):
+            print("Unexpected number of clauses in the problem")
+            sys.exit(0)
+        file.close()
+        return [variables, clause]

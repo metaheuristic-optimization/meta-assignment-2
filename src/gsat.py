@@ -1,4 +1,4 @@
 class GSAT:
 
-    def run:
+    def run(self, formula, max_steps):
         pass
