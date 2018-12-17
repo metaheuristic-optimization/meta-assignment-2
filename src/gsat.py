@@ -12,15 +12,16 @@ class GSAT:
             tmp_state = best_state.copy()
             current_best = tmp_state.copy()
 
-            print(best_state)
-            for x in variables:
+            for x in range(1000):
                 tmp = tmp_state.copy()
 
+                random_flip_index = np.random.randint(1, 20)
+
                 # Flip variable
-                if tmp[x] == 0:
-                    tmp[x] = 1
-                elif tmp[x] == 1:
-                    tmp[x] = 0
+                if tmp[random_flip_index] == 0:
+                    tmp[random_flip_index] = 1
+                elif tmp[random_flip_index] == 1:
+                    tmp[random_flip_index] = 0
 
                 solution_found, unsat_clause = self.solution_status(formula, tmp)
 
@@ -29,7 +30,6 @@ class GSAT:
                     return tmp
 
                 if unsat_clause < best_flip:
-                    print(x)
                     best_flip = unsat_clause
                     current_best = tmp.copy()
 
