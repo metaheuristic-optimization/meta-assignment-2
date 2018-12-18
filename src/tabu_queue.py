@@ -15,4 +15,6 @@ class Tabu:
             self.queue.pop(0)
 
     def is_item_in_queue(self, item):
+        # print('checking item in queue {0}'.format(item))
+        # print(self.queue)
         return item in self.queue

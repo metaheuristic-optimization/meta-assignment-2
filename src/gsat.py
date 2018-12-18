@@ -10,10 +10,12 @@ class GSAT:
         self.max_iterations = max_iterations
         self.tabu_max_length = tabu_max_length
         self.variables = formula[0]
+        self.tabu = Tabu(tabu_max_length)
 
     def run(self):
         for i in range(self.max_steps):
             state = self.generate_random_starting_point(self.variables)
+            self.tabu.reset()
 
             for x in range(self.max_iterations):
                 solution_found, unsat_clause = self.solution_status(self.formula, state)
@@ -27,23 +29,22 @@ class GSAT:
     def choose_best_variable(self, state, current_unsat_clause):
         best_flip = current_unsat_clause
         best = state.copy()
-        tabu = Tabu(self.tabu_max_length)
 
         for i in range(len(self.variables)):
-            if tabu.is_item_in_queue(self.variables[i]):
+            if self.tabu.is_item_in_queue(self.variables[i]):
+                # print('Skipping')
                 continue
-
-            tabu.add_to_queue(self.variables[i])
 
             tmp_state = state.copy()
 
-            self.flip_variable(tmp_state, i + 1)
+            self.flip_variable(tmp_state, self.variables[i])
 
             _, unsat_clause = self.solution_status(self.formula, tmp_state)
 
             if unsat_clause < best_flip:
                 best_flip = unsat_clause
                 best = tmp_state
+                self.tabu.add_to_queue(self.variables[i])
 
         return best
 
