@@ -5,35 +5,32 @@ class GSAT:
 
     def run(self, formula, max_steps):
         variables = formula[0]
-        best_state = self.generate_random_starting_point(variables)
 
         for i in range(max_steps):
             best_flip = 1000000
-            tmp_state = best_state.copy()
-            current_best = tmp_state.copy()
+
+            state = self.generate_random_starting_point(variables)
 
             for x in range(1000):
-                tmp = tmp_state.copy()
+                solution_found, unsat_clause = self.solution_status(formula, state)
+
+                if solution_found is True:
+                    print('Solution found')
+                    return state
 
                 random_flip_index = np.random.randint(1, 20)
 
                 # Flip variable
-                if tmp[random_flip_index] == 0:
-                    tmp[random_flip_index] = 1
-                elif tmp[random_flip_index] == 1:
-                    tmp[random_flip_index] = 0
+                self.flip_variable(state, random_flip_index)
 
-                solution_found, unsat_clause = self.solution_status(formula, tmp)
+                if unsat_clause > best_flip:
+                    self.flip_variable(state, random_flip_index)
 
-                if solution_found is True:
-                    print('Solution found')
-                    return tmp
-
-                if unsat_clause < best_flip:
-                    best_flip = unsat_clause
-                    current_best = tmp.copy()
-
-            best_state = current_best.copy()
+    def flip_variable(self, item, index):
+        if item[index] == 0:
+            item[index] = 1
+        elif item[index] == 1:
+            item[index] = 0
 
     def generate_random_starting_point(self, variables):
         variable_dict = {}
