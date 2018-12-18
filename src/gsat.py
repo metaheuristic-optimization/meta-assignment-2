@@ -1,30 +1,51 @@
 import numpy as np
+from src.tabu_queue import Tabu
 
 
 class GSAT:
 
-    def run(self, formula, max_steps):
-        variables = formula[0]
+    def __init__(self, formula, max_steps, max_iterations, tabu_max_length):
+        self.formula = formula
+        self.max_steps = max_steps
+        self.max_iterations = max_iterations
+        self.tabu_max_length = tabu_max_length
+        self.variables = formula[0]
 
-        for i in range(max_steps):
-            best_flip = 1000000
+    def run(self):
+        for i in range(self.max_steps):
+            state = self.generate_random_starting_point(self.variables)
 
-            state = self.generate_random_starting_point(variables)
-
-            for x in range(1000):
-                solution_found, unsat_clause = self.solution_status(formula, state)
+            for x in range(self.max_iterations):
+                solution_found, unsat_clause = self.solution_status(self.formula, state)
 
                 if solution_found is True:
                     print('Solution found')
                     return state
 
-                random_flip_index = np.random.randint(1, 20)
+                state = self.choose_best_variable(state, unsat_clause)
 
-                # Flip variable
-                self.flip_variable(state, random_flip_index)
+    def choose_best_variable(self, state, current_unsat_clause):
+        best_flip = current_unsat_clause
+        best = state.copy()
+        tabu = Tabu(self.tabu_max_length)
 
-                if unsat_clause > best_flip:
-                    self.flip_variable(state, random_flip_index)
+        for i in range(len(self.variables)):
+            if tabu.is_item_in_queue(self.variables[i]):
+                continue
+
+            tabu.add_to_queue(self.variables[i])
+
+            tmp_state = state.copy()
+
+            self.flip_variable(tmp_state, i + 1)
+
+            _, unsat_clause = self.solution_status(self.formula, tmp_state)
+
+            if unsat_clause < best_flip:
+                best_flip = unsat_clause
+                best = tmp_state
+
+        return best
 
     def flip_variable(self, item, index):
         if item[index] == 0:
