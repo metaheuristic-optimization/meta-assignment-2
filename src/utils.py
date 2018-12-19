@@ -63,3 +63,10 @@ class Utils:
         for i in variables:
             variable_dict[variables[i - 1]] = int(np.random.randint(2))
         return variable_dict
+
+    @staticmethod
+    def flip_variable(item, index):
+        if item[index] == 0:
+            item[index] = 1
+        elif item[index] == 1:
+            item[index] = 0

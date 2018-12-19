@@ -38,7 +38,7 @@ class GSAT:
 
             tmp_state = state.copy()
 
-            self.flip_variable(tmp_state, self.variables[i])
+            Utils.flip_variable(tmp_state, self.variables[i])
 
             _, unsat_clause = self.solution_status(self.formula, tmp_state)
 
@@ -48,12 +48,6 @@ class GSAT:
                 self.tabu.add_to_queue(self.variables[i])
 
         return best
-
-    def flip_variable(self, item, index):
-        if item[index] == 0:
-            item[index] = 1
-        elif item[index] == 1:
-            item[index] = 0
 
     def solution_status(self, instance, sol):
         clause = instance[1]
