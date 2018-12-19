@@ -1,39 +1,58 @@
 import numpy as np
+from src.tabu_queue import Tabu
 
 
 class GSAT:
 
-    def run(self, formula, max_steps):
-        variables = formula[0]
-        best_state = self.generate_random_starting_point(variables)
+    def __init__(self, formula, max_steps, max_iterations, tabu_max_length):
+        self.formula = formula
+        self.max_steps = max_steps
+        self.max_iterations = max_iterations
+        self.tabu_max_length = tabu_max_length
+        self.variables = formula[0]
+        self.tabu = Tabu(tabu_max_length)
 
-        for i in range(max_steps):
-            best_flip = 1000000
-            tmp_state = best_state.copy()
-            current_best = tmp_state.copy()
+    def run(self):
+        for i in range(self.max_steps):
+            state = self.generate_random_starting_point(self.variables)
+            self.tabu.reset()
 
-            for x in range(1000):
-                tmp = tmp_state.copy()
-
-                random_flip_index = np.random.randint(1, 20)
-
-                # Flip variable
-                if tmp[random_flip_index] == 0:
-                    tmp[random_flip_index] = 1
-                elif tmp[random_flip_index] == 1:
-                    tmp[random_flip_index] = 0
-
-                solution_found, unsat_clause = self.solution_status(formula, tmp)
+            for x in range(self.max_iterations):
+                solution_found, unsat_clause = self.solution_status(self.formula, state)
 
                 if solution_found is True:
                     print('Solution found')
-                    return tmp
+                    return state
 
-                if unsat_clause < best_flip:
-                    best_flip = unsat_clause
-                    current_best = tmp.copy()
+                state = self.choose_best_variable(state, unsat_clause)
 
-            best_state = current_best.copy()
+    def choose_best_variable(self, state, current_unsat_clause):
+        best_flip = current_unsat_clause
+        best = state.copy()
+
+        for i in range(len(self.variables)):
+            if self.tabu.is_item_in_queue(self.variables[i]):
+                # print('Skipping')
+                continue
+
+            tmp_state = state.copy()
+
+            self.flip_variable(tmp_state, self.variables[i])
+
+            _, unsat_clause = self.solution_status(self.formula, tmp_state)
+
+            if unsat_clause < best_flip:
+                best_flip = unsat_clause
+                best = tmp_state
+                self.tabu.add_to_queue(self.variables[i])
+
+        return best
+
+    def flip_variable(self, item, index):
+        if item[index] == 0:
+            item[index] = 1
+        elif item[index] == 1:
+            item[index] = 0
 
     def generate_random_starting_point(self, variables):
         variable_dict = {}
