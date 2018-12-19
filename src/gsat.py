@@ -1,5 +1,5 @@
-import numpy as np
 from src.tabu_queue import Tabu
+from src.utils import Utils
 
 
 class GSAT:
@@ -14,7 +14,8 @@ class GSAT:
 
     def run(self):
         for i in range(self.max_steps):
-            state = self.generate_random_starting_point(self.variables)
+
+            state = Utils.generate_random_starting_point(self.variables)
             self.tabu.reset()
 
             for x in range(self.max_iterations):
@@ -53,13 +54,6 @@ class GSAT:
             item[index] = 1
         elif item[index] == 1:
             item[index] = 0
-
-    def generate_random_starting_point(self, variables):
-        variable_dict = {}
-
-        for i in variables:
-            variable_dict[variables[i - 1]] = int(np.random.randint(2))
-        return variable_dict
 
     def solution_status(self, instance, sol):
         clause = instance[1]

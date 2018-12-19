@@ -1,8 +1,11 @@
 import sys
+import numpy as np
+
 
 class Utils:
 
-    def load_dimacs_cnf_file(self, cnf_file):
+    @staticmethod
+    def load_dimacs_cnf_file(cnf_file):
         file = open(cnf_file, 'r')
 
         tVariables = -1
@@ -52,3 +55,11 @@ class Utils:
             sys.exit(0)
         file.close()
         return [variables, clause]
+
+    @staticmethod
+    def generate_random_starting_point(variables):
+        variable_dict = {}
+
+        for i in variables:
+            variable_dict[variables[i - 1]] = int(np.random.randint(2))
+        return variable_dict
