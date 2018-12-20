@@ -14,9 +14,9 @@ class Novelty:
         if current_flip_variable not in random_clause:
             return current_flip_variable
         else:
-            return self.choose_best_variable_in_clause(state)
+            return self.choose_best_or_second_best_variable_in_clause(state)
 
-    def choose_best_variable_in_clause(self, state):
+    def choose_best_or_second_best_variable_in_clause(self, state):
         tmp_state = state.copy()
         scores = {}
 
@@ -39,8 +39,8 @@ class Novelty:
 
         if noise < self.p:
             return second_best
-
-        return best
+        else:
+            return best
 
     def solution_status(self, instance, sol):
         clause = instance[1]

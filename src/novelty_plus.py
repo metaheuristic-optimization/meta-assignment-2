@@ -1,6 +1,7 @@
 import random
 from src.utils import Utils
 from src.novelty import Novelty
+from src.walk_sat import WalkSAT
 
 
 class NoveltyPlus:
@@ -12,11 +13,13 @@ class NoveltyPlus:
         self.max_iterations = max_iterations
         self.variables = formula[0]
         self.novelty = Novelty(formula, self.variables, p)
+        self.walkSat = WalkSAT(formula, self.variables)
 
     def run(self):
 
+        state = Utils.generate_random_starting_point(self.variables)
+
         for i in range(self.max_iterations):
-            state = Utils.generate_random_starting_point(self.variables)
 
             solution_found, unsat_clause, unsat_clause_list = self.solution_status(self.formula, state)
 
@@ -24,12 +27,15 @@ class NoveltyPlus:
                 print('Solution found')
                 return state
 
-            random_flip = random.choice(self.variables)
-            random_clause = random.choice(unsat_clause_list)
+            if self.wp < random.uniform(0, 1):
+                state = self.walkSat.run(state)
+            else:
+                random_flip = random.choice(self.variables)
+                random_clause = random.choice(unsat_clause_list)
 
-            best_flip = self.novelty.run_heuristic(state, random_flip, random_clause)
+                best_flip = self.novelty.run_heuristic(state, random_flip, random_clause)
 
-            Utils.flip_variable(state, best_flip)
+                Utils.flip_variable(state, best_flip)
 
     def solution_status(self, instance, sol):
         clause = instance[1]

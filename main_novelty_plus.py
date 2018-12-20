@@ -1,6 +1,6 @@
 from src import Utils
 from src import NoveltyPlus
-
+from multiprocessing import Process
 
 def run():
     cnf = Utils.load_dimacs_cnf_file('./datasets/uf20-020.cnf')
@@ -9,5 +9,13 @@ def run():
 
     print(solution)
 
+if __name__ == '__main__':
+    threads = []
 
-run()
+    for i in range(100):
+        p = Process(target=run)
+        p.start()
+        threads.append(p)
+
+    for process in threads:
+        process.join()

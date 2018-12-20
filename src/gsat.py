@@ -33,7 +33,6 @@ class GSAT:
 
         for i in range(len(self.variables)):
             if self.tabu.is_item_in_queue(self.variables[i]):
-                # print('Skipping')
                 continue
 
             tmp_state = state.copy()
