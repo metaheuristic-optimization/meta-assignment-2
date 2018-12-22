@@ -1,6 +1,7 @@
 import time
 import math
 import random
+import functools
 
 
 class TSP:
@@ -10,11 +11,11 @@ class TSP:
         self.genSize = 0
         self.data = {}
         self.data_list = []
-        self.readInstance()
+        self.read_instance()
         self.total_iterations = total_iterations
         self.local_search_time = local_search_time
 
-    def readInstance(self):
+    def read_instance(self):
         """
         Read data from a given file
         """
@@ -27,6 +28,7 @@ class TSP:
         self.data_list = list(self.data.keys())
         file.close()
 
+    @functools.lru_cache(maxsize=None)
     def euclidean_distance(self, c1, c2):
         """
         Distance between two cities
@@ -120,7 +122,6 @@ class TSP:
         solution, cost = self.three_opt(solution, cost)
 
         for i in range(self.total_iterations):
-
             solution = self.two_opt(initial_solution)
 
             solution, cost = self.three_opt(solution, cost)
