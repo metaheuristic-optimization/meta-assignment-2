@@ -35,7 +35,6 @@ class TSP:
 
     def nearest_neighbours(self):
         tour = self.data.copy()
-        print(tour.keys())
         random_start = random.choice(list(tour))
         path = []
         current_location = random_start
@@ -56,6 +55,29 @@ class TSP:
 
         return path
 
+    def local_search(self, state, cost):
+
+        tmp = state.copy()
+        new_state = state
+        new_cost = cost
+
+        for a in self.data_list:
+
+            for b in self.data_list:
+
+                for c in self.data_list:
+
+                    new_tmp_state = tmp[:a] + tmp[a:b][::-1] + tmp[b:c][::-1] + tmp[c:]
+                    new_tmp_cost = self.calculate_cost(new_tmp_state)
+
+                    if new_tmp_cost < cost:
+                        new_state = new_state
+                        new_cost = new_tmp_cost
+                        return new_state, new_cost
+
+        return new_state, new_cost
+
+
     def calculate_cost(self, state):
         """
         Computing the cost or fitness of the individual
@@ -70,5 +92,8 @@ class TSP:
         nearest_neighbours = self.nearest_neighbours()
         cost = self.calculate_cost(nearest_neighbours)
 
-        print(nearest_neighbours)
+        print(cost)
+
+        cost = self.local_search(nearest_neighbours, cost)
+
         print(cost)
