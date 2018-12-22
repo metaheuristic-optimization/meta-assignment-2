@@ -6,14 +6,14 @@ import functools
 
 class TSP:
 
-    def __init__(self, file, total_iterations, local_search_time):
+    def __init__(self, file, total_iterations, local_search_time_limit):
         self.file = file
         self.genSize = 0
         self.data = {}
         self.data_list = []
         self.read_instance()
         self.total_iterations = total_iterations
-        self.local_search_time = local_search_time
+        self.local_search_time_limit = local_search_time_limit
 
     def read_instance(self):
         """
@@ -79,7 +79,7 @@ class TSP:
                         new_state = new_state
                         new_cost = new_tmp_cost
 
-                    if (time.time() - start_time) > self.local_search_time:
+                    if (time.time() - start_time) > self.local_search_time_limit:
                         print('Exceeded maximum time in local search, returning best found value')
                         return new_state, new_cost
 
@@ -122,7 +122,7 @@ class TSP:
         solution, cost = self.three_opt(solution, cost)
 
         for i in range(self.total_iterations):
-            solution = self.two_opt(initial_solution)
+            solution = self.two_opt(solution)
 
             solution, cost = self.three_opt(solution, cost)
 
