@@ -1,16 +1,18 @@
-import numpy as np
+import time
 import math
 import random
 
 
 class TSP:
 
-    def __init__(self, file):
+    def __init__(self, file, total_iterations, local_search_time):
         self.file = file
         self.genSize = 0
         self.data = {}
         self.data_list = []
         self.readInstance()
+        self.total_iterations = total_iterations
+        self.local_search_time = local_search_time
 
     def readInstance(self):
         """
@@ -55,11 +57,12 @@ class TSP:
 
         return path
 
-    def local_search(self, state, cost):
+    def three_opt(self, state, cost):
 
         tmp = state.copy()
         new_state = state
         new_cost = cost
+        start_time = time.time()
 
         for a in self.data_list:
 
@@ -73,10 +76,27 @@ class TSP:
                     if new_tmp_cost < cost:
                         new_state = new_state
                         new_cost = new_tmp_cost
+
+                    if (time.time() - start_time) > self.local_search_time:
+                        print('Exceeded maximum time in local search, returning best found value')
                         return new_state, new_cost
 
         return new_state, new_cost
 
+    def two_opt(self, state):
+
+        tmp_state = state.copy()
+
+        for i in range(5):
+            random_locations = random.sample(range(len(self.data_list)), 2)
+
+            edge_1 = random_locations[0]
+            edge_2 = random_locations[1]
+
+            tmp_state[edge_1] = state[edge_2]
+            tmp_state[edge_2] = state[edge_1]
+
+        return tmp_state
 
     def calculate_cost(self, state):
         """
@@ -89,11 +109,22 @@ class TSP:
         return cost
 
     def run(self):
-        nearest_neighbours = self.nearest_neighbours()
-        cost = self.calculate_cost(nearest_neighbours)
+        initial_solution = self.nearest_neighbours()
+        initial_cost = self.calculate_cost(initial_solution)
 
-        print(cost)
+        print('Initial Cost {0}'.format(initial_cost))
 
-        cost = self.local_search(nearest_neighbours, cost)
+        solution = initial_solution.copy()
+        cost = initial_cost
 
-        print(cost)
+        solution, cost = self.three_opt(solution, cost)
+
+        for i in range(self.total_iterations):
+
+            solution = self.two_opt(initial_solution)
+
+            solution, cost = self.three_opt(solution, cost)
+
+        improvement = initial_cost - cost
+        print('Final cost is {0}'.format(cost))
+        print('Improvement is {0}'.format(improvement))
