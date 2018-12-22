@@ -6,7 +6,7 @@ import functools
 
 class TSP:
 
-    def __init__(self, file, total_iterations, local_search_time_limit):
+    def __init__(self, file, total_iterations, local_search_time_limit, starting_algorithm):
         self.file = file
         self.genSize = 0
         self.data = {}
@@ -14,6 +14,7 @@ class TSP:
         self.read_instance()
         self.total_iterations = total_iterations
         self.local_search_time_limit = local_search_time_limit
+        self.starting_algorithm = starting_algorithm
 
     def read_instance(self):
         """
@@ -37,7 +38,18 @@ class TSP:
         d2 = self.data[c2]
         return math.sqrt((d1[0] - d2[0]) ** 2 + (d1[1] - d2[1]) ** 2)
 
+    def random_tours(self):
+        print('Generating initial random tour')
+        tour = self.data_list.copy()
+
+        random.shuffle(tour)
+
+        tour.append(tour[0])
+
+        return tour
+
     def nearest_neighbours(self):
+        print('Generating initial nearest neighbours')
         tour = self.data.copy()
         random_start = random.choice(list(tour))
         path = []
@@ -56,6 +68,8 @@ class TSP:
 
             path.append(nearest_location)
             del tour[nearest_location]
+
+        path.append(path[0])
 
         return path
 
@@ -111,7 +125,14 @@ class TSP:
         return cost
 
     def run(self):
-        initial_solution = self.nearest_neighbours()
+
+        initial_solution = self.data_list
+
+        if self.starting_algorithm == 'nearest_neighbours':
+            initial_solution = self.nearest_neighbours()
+        elif self.starting_algorithm == 'random_tours':
+            self.starting_algorithm = self.random_tours()
+
         initial_cost = self.calculate_cost(initial_solution)
 
         print('Initial Cost {0}'.format(initial_cost))
