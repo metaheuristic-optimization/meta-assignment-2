@@ -35,8 +35,7 @@ class NoveltyPlus:
 
             # If solution is found then return the solution
             if solution_found is True:
-                print('Solution found')
-                return state
+                return state, i
 
             # Randomly chose if we will be doing walk-sat or novelty search based on the value of wp
             if self.wp < random.uniform(0, 1):
@@ -56,6 +55,8 @@ class NoveltyPlus:
 
                 # Flip the best variable from novelty heuristic
                 Utils.flip_variable(state, best_flip)
+
+        return None, self.max_iterations
 
     def solution_status(self, instance, sol):
         """

@@ -39,12 +39,12 @@ class GSAT:
 
                 # If true then return the state and current iteration number
                 if solution_found is True:
-                    return state, i
+                    return state, x
 
                 # Update start with new best state
                 state = self.choose_best_variable(state, unsat_clause)
 
-        return None, self.max_steps
+        return None, self.max_iterations
 
     def choose_best_variable(self, state, current_unsat_clause):
         """
