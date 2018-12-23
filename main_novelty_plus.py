@@ -15,13 +15,15 @@ def run():
 
     end_time = (time.time() - start_time)
 
+    f = open('./experiments/novelty_plus/{0}.csv'.format(sys.argv[1]), 'a')
+
     if state is not None:
         print('Solution found at iteration {0} in {1} seconds'.format(iterations, end_time))
+        f.write('{0}, {1}\n'.format(iterations, end_time))
     else:
         print('Unable to find a solution with {0} iterations in {1} seconds'.format(i, end_time))
+        f.write('{0}, {1}\n'.format(iterations, None))
 
-    f = open('./experiments/novelty_plus/{0}.csv'.format(sys.argv[1]), 'a')
-    f.write('{0}, {1}\n'.format(iterations, end_time))
     f.close()
 
 

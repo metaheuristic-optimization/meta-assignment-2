@@ -1,5 +1,5 @@
 import sys
-import numpy as np
+import random
 
 
 class Utils:
@@ -75,7 +75,8 @@ class Utils:
         variable_dict = {}
 
         for i in variables:
-            variable_dict[variables[i - 1]] = int(np.random.randint(2))
+            variable_dict[variables[i - 1]] = 1 if random.random() < 0.5 else 0
+
         return variable_dict
 
     @staticmethod
