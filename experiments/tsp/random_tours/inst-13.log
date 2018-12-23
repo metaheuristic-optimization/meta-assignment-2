@@ -1,0 +1,55 @@
+=======Experiment 0=======
+Generating initial random tour
+Initial Cost 125348764.95729138
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Final cost is 120386849.64709477
+Improvement is 4961915.310196608
+=======Experiment 1=======
+Generating initial random tour
+Initial Cost 118723399.40465908
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Final cost is 109051139.92562534
+Improvement is 9672259.479033738
+=======Experiment 2=======
+Generating initial random tour
+Initial Cost 125158145.70316304
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Final cost is 118730661.37430507
+Improvement is 6427484.328857973
+=======Experiment 3=======
+Generating initial random tour
+Initial Cost 122812651.1946038
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Final cost is 108667505.30156197
+Improvement is 14145145.893041834
+=======Experiment 4=======
+Generating initial random tour
+Initial Cost 122048094.86750157
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Final cost is 119480207.55818483
+Improvement is 2567887.3093167394

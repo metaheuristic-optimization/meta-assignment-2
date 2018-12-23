@@ -1,0 +1,30 @@
+=======Experiment 0=======
+Generating initial nearest neighbours
+Initial Cost 18136594.053307865
+Final cost is 17863542.80756679
+Improvement is 273051.24574107304
+=======Experiment 1=======
+Generating initial nearest neighbours
+Initial Cost 16948341.010214478
+Exceeded maximum time in local search, returning best found value
+Final cost is 16331125.32553581
+Improvement is 617215.6846786682
+=======Experiment 2=======
+Generating initial nearest neighbours
+Initial Cost 16513658.244187113
+Exceeded maximum time in local search, returning best found value
+Final cost is 16215321.667493487
+Improvement is 298336.5766936261
+=======Experiment 3=======
+Generating initial nearest neighbours
+Initial Cost 16461635.531299397
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Final cost is 16222686.088655144
+Improvement is 238949.44264425337
+=======Experiment 4=======
+Generating initial nearest neighbours
+Initial Cost 18574533.27935507
+Final cost is 18238902.010652192
+Improvement is 335631.26870287955

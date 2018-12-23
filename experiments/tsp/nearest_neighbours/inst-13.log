@@ -1,0 +1,55 @@
+=======Experiment 0=======
+Generating initial nearest neighbours
+Initial Cost 31072561.86109735
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Final cost is 31062310.2443217
+Improvement is 10251.616775650531
+=======Experiment 1=======
+Generating initial nearest neighbours
+Initial Cost 21169804.35539701
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Final cost is 21073807.93523246
+Improvement is 95996.42016454786
+=======Experiment 2=======
+Generating initial nearest neighbours
+Initial Cost 23529552.0979851
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Final cost is 23521441.23498904
+Improvement is 8110.862996060401
+=======Experiment 3=======
+Generating initial nearest neighbours
+Initial Cost 26571078.886074957
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Final cost is 26167319.681349553
+Improvement is 403759.20472540334
+=======Experiment 4=======
+Generating initial nearest neighbours
+Initial Cost 25978437.973334372
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Exceeded maximum time in local search, returning best found value
+Final cost is 25826622.845097687
+Improvement is 151815.12823668495

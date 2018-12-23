@@ -1,0 +1,28 @@
+=======Experiment 0=======
+Generating initial random tour
+Initial Cost 24735561.031726714
+Final cost is 23306061.455556992
+Improvement is 1429499.5761697218
+=======Experiment 1=======
+Generating initial random tour
+Initial Cost 23378949.17958357
+Exceeded maximum time in local search, returning best found value
+Final cost is 23078402.36250422
+Improvement is 300546.81707935035
+=======Experiment 2=======
+Generating initial random tour
+Initial Cost 24867417.997846507
+Exceeded maximum time in local search, returning best found value
+Final cost is 24400902.713671114
+Improvement is 466515.28417539224
+=======Experiment 3=======
+Generating initial random tour
+Initial Cost 24170780.499963153
+Exceeded maximum time in local search, returning best found value
+Final cost is 23605443.990120683
+Improvement is 565336.5098424703
+=======Experiment 4=======
+Generating initial random tour
+Initial Cost 23743416.462139327
+Final cost is 23228740.37630377
+Improvement is 514676.08583555743

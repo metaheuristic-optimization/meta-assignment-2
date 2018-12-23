@@ -6,6 +6,10 @@ import sys
 
 cnf = Utils.load_dimacs_cnf_file('./datasets/{0}'.format(sys.argv[1]))
 
+f = open('./experiments/gsat/{0}.csv'.format(sys.argv[1]), 'w')
+f.write('{0}, {1}, {2}, {3}\n'.format("Iterations", "Restarts", "Time", "Found"))
+f.close()
+
 
 def run():
     start_time = time.time()
@@ -19,10 +23,10 @@ def run():
 
     if state is not None:
         print('Solution found at iteration {0} in {1} seconds'.format(iterations, end_time))
-        f.write('{0}, {1}, {2}\n'.format(iterations, restarts, end_time))
+        f.write('{0}, {1}, {2}, {3}\n'.format(iterations, restarts, end_time, "True"))
     else:
         print('Unable to find a solution with {0} iterations in {1} seconds'.format(i, end_time))
-        f.write('{0}, {1}, {2}\n'.format(iterations, restarts, None))
+        f.write('{0}, {1}, {2}, {3}\n'.format(iterations, restarts, end_time, "False"))
 
     f.close()
 
