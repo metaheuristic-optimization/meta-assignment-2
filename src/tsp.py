@@ -205,7 +205,7 @@ class TSP:
         if self.starting_algorithm == 'nearest_neighbours':
             initial_solution = self.nearest_neighbours()
         elif self.starting_algorithm == 'random_tours':
-            self.starting_algorithm = self.random_tours()
+            initial_solution = self.random_tours()
 
         # Compute the initial cost
         initial_cost = self.calculate_cost(initial_solution)
