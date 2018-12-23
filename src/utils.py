@@ -1,11 +1,21 @@
 import sys
 import numpy as np
 
+"""
+    General re-usable utility methods
+"""
+
 
 class Utils:
 
     @staticmethod
     def load_dimacs_cnf_file(cnf_file):
+        """
+        Reads and parses a CNF Dimacs formatted file
+
+        :param cnf_file: The location of the file to load
+        :return: The parsed file
+        """
         file = open(cnf_file, 'r')
 
         tVariables = -1
@@ -58,6 +68,11 @@ class Utils:
 
     @staticmethod
     def generate_random_starting_point(variables):
+        """
+        Generates a random starting point
+        :param variables: A list of variables
+        :return: A dictionary of randomly selected variables
+        """
         variable_dict = {}
 
         for i in variables:
@@ -66,6 +81,12 @@ class Utils:
 
     @staticmethod
     def flip_variable(item, index):
+        """
+        Flips a variable in place.
+        :param item: A dictionary
+        :param index: An index in the dictionary to flip
+        :return:
+        """
         if item[index] == 0:
             item[index] = 1
         elif item[index] == 1:
