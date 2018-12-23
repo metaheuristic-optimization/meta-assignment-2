@@ -23,7 +23,7 @@ def run():
 
     if state is not None:
         print('Solution found at iteration {0} in {1} seconds'.format(iterations, end_time))
-        f.write('{0}, {1}. {2}\n'.format(iterations, end_time, "True"))
+        f.write('{0}, {1}, {2}\n'.format(iterations, end_time, "True"))
     else:
         print('Unable to find a solution with {0} iterations in {1} seconds'.format(i, end_time))
         f.write('{0}, {1}, {2}\n'.format(iterations, end_time, "False"))
