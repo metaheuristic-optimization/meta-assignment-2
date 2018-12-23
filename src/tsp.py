@@ -3,12 +3,11 @@ import math
 import random
 import functools
 
-"""
-    TSP Implementation
-"""
-
 
 class TSP:
+    """
+    TSP Implementation
+    """
 
     def __init__(self, file, total_iterations, local_search_time_limit, starting_algorithm):
         self.file = file
@@ -37,6 +36,9 @@ class TSP:
     def euclidean_distance(self, c1, c2):
         """
         Calculates the distance between 2 cities using euclidean distance algorithm
+
+        Note as this function gets called many thousands of times, I have memoized the function with lru_cache
+        which will prevent this function from running if it has the result already in cache
         :param c1: The first city
         :param c2: The second city
         :return: The distance between the first and second city

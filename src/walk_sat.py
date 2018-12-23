@@ -1,12 +1,11 @@
 import random
 from src.utils import Utils
 
-"""
-    An implementation of the walk sat algorithm
-"""
-
 
 class WalkSAT:
+    """
+    An implementation of the walk sat algorithm
+    """
 
     def __init__(self, formula, variable):
         self.formula = formula

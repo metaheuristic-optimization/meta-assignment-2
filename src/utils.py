@@ -1,12 +1,11 @@
 import sys
 import numpy as np
 
-"""
-    General re-usable utility methods
-"""
-
 
 class Utils:
+    """
+    General re-usable utility methods
+    """
 
     @staticmethod
     def load_dimacs_cnf_file(cnf_file):

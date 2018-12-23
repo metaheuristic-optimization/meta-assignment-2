@@ -1,9 +1,7 @@
-"""
-Simple implementation of a tabu queue using a list
-"""
-
-
 class Tabu:
+    """
+    Simple implementation of a tabu queue using a list
+    """
     queue = []
     max_length = 5
 
