@@ -1,6 +1,10 @@
 import random
 from src.utils import Utils
 
+"""
+    An implementation of the walk sat algorithm
+"""
+
 
 class WalkSAT:
 
@@ -9,18 +13,42 @@ class WalkSAT:
         self.variable = variable
 
     def run(self, state):
+        """
+        Run the walk sat algorithm as outlined below
 
-        solution_found, unsat_clause, unsat_clause_list = self.solution_status(self.formula, state)
+            - Get a list of unsatisfied clauses
+            - Select a random clause
+            - Select a random variable from the selected clause
+            - Flip the selected random variable
+        :param state: The current state
+        :return: The new state with the flipped variable
+        """
 
+        # Get a list of unsatisfied clauses
+        _, _, unsat_clause_list = self.solution_status(self.formula, state)
+
+        # Chose a random clause
         random_clause = random.choice(unsat_clause_list)
 
+        # Chose a random variable from the selected clause
         random_variable_in_clause = random.choice(random_clause)
 
+        # Flip variable. Make sure the variable is a plus value as the clause may contain negative values
         Utils.flip_variable(state, abs(random_variable_in_clause))
 
         return state
 
     def solution_status(self, instance, sol):
+        """
+            Check the solution status
+
+        :param instance: The current state of variables
+        :param sol: Returns
+                - If the solution satisfies all clauses
+                - The total number of unsatisfied clauses
+                - A list of unsatisfied clauses
+        :return:
+        """
         clause = instance[1]
         unsat_clause = 0
         unsat_clause_list = []
