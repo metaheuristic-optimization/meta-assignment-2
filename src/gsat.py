@@ -3,6 +3,9 @@ from src.utils import Utils
 
 
 class GSAT:
+    """
+    GSAT Implementation
+    """
 
     def __init__(self, formula, max_steps, max_iterations, tabu_max_length):
         self.formula = formula
@@ -49,6 +52,14 @@ class GSAT:
         return best
 
     def solution_status(self, instance, sol):
+        """
+        Checks if the solution satisfies all the clauses
+        :param instance: The current state
+        :param sol: The solution to check
+        :return:
+            - True if all clauses have been satisfied, otherwise False
+            - The number of clauses that are unsatisfied
+        """
         clause = instance[1]
         unsat_clause = 0
         for clause_i in clause:

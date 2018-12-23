@@ -144,7 +144,7 @@ class TSP:
 
                     # Check if the swapped 3 variables has reduced the cost
                     if new_tmp_cost < cost:
-                        new_state = new_state
+                        new_state = new_tmp_state
                         new_cost = new_tmp_cost
 
                     # Check if we have exceeded the configured time limit
